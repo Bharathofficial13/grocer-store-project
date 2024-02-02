@@ -13,9 +13,10 @@ def get_all_products(connection):
         response.append({
             'product_id': prod_id,
             'name': prod_name,
-            'unit_id': unit_id,
+            'uom_id': unit_id,
             'price_per_unit': price,
-            'Unit': unit
+            'uom_name':unit
+            
         })
 
 
@@ -24,7 +25,7 @@ def insert_new_product(connection,product):
     
     cursor=connection.cursor()
     query=("Insert into products(prod_name,unit_id,price) values(%s,%s,%s)")
-    data=(product['name'],product['unit_id'],product['price'])
+    data=(product['product_name'],product['uom_id'],product['price_per_unit'])
     cursor.execute(query,data)
     connection.commit()
     return cursor.lastrowid
